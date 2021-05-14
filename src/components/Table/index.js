@@ -6,6 +6,7 @@ function Table (props) {
         return (
             <tr>
                 <th><img src={person.picture.medium}/></th>
+                <th>{person.name.first + " " + person.name.last}</th>
                 <th>{person.gender}</th>
                 <th>{person.dob.age}</th>
                 <th>{person.location.city + ", " + person.location.state}</th>
@@ -18,6 +19,7 @@ function Table (props) {
         <table>
             <tr>
                 <th>Picture</th>
+                <th>Name</th>
                 <th>Gender</th>
                 <th>Age</th>
                 <th>Location</th>
