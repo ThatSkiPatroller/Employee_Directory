@@ -3,7 +3,8 @@ import "./style.css";
 
 function SearchForm (props) {
     return (
-        <form classname="search">
+        // passing down prop that's a function
+        <form classname="search" onSubmit={props.handleFormSubmit} >
             <div classname="form-group">
                 <input
                     value={props.search}
@@ -19,6 +20,7 @@ function SearchForm (props) {
                         {props.response}
                     </datalist>
             </div>
+            <button type="submit" className="btn btn-primary">Search</button>
         </form>
     )
 }

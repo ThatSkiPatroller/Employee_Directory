@@ -5,12 +5,14 @@ import SearchForm from "../components/SearchForm";
 import Header from "../components/Header";
 
 class Home extends React.Component {
+
     state = {
         response: [],
         name: "Trace",
         search: "",
         searchRes: []
     }
+
     async componentDidMount() {
         console.log("Component did mount");
         const employees = await API.getRandomUser()
@@ -20,14 +22,25 @@ class Home extends React.Component {
 
     handleInputChange = event => {
         this.setState({ search: event.target.value })
+        this.
     }
 
     handleFormSubmit = event => {
+        console.log("handleformsubmit working")
         event.preventDefault();
-        this.response.filter(this.search)
+        this.findIt()
     }
+
+    findIt = () => {
+        console.log("Findit function is working");
+        const finder = this.state.response.filter((boot) => {
+            return (boot.name.first === this.state.search) 
+        })
+        console.log(finder);
+    }
+
     render() {
-    return ( 
+    return (
         <div>
        {/* {this.state.response.map((person)=> (
            <p>{person.name.first + " " + person.name.last}</p>
@@ -42,6 +55,5 @@ class Home extends React.Component {
         </div>
     )}
 }
-
 
 export default Home;
