@@ -17,12 +17,12 @@ class Home extends React.Component {
         console.log("Component did mount");
         const employees = await API.getRandomUser()
         console.log(employees.data.results)
-        this.setState({response:employees.data.results})
+        this.setState({response:employees.data.results, searchRes: employees.data.results})
     } 
 
     handleInputChange = event => {
         this.setState({ search: event.target.value })
-        this.
+        
     }
 
     handleFormSubmit = event => {
@@ -36,8 +36,30 @@ class Home extends React.Component {
         const finder = this.state.response.filter((boot) => {
             return (boot.name.first === this.state.search) 
         })
+        this.setState({
+            searchRes: finder
+        })
         console.log(finder);
     }
+
+    sorter = (property, property2) => {
+        const employees = this.state.response.sort(function (a, b) {
+        if (property2) {
+            if (a[property][property2].toLowerCase() < b[property][property2].toLowerCase()) { return -1; }
+       
+            if (a[property][property2].toLowerCase() > b[property][property2].toLowerCase()) { return 1; }
+          return 0; 
+            
+        } else {
+            if (a[property].toLowerCase() < b[property].toLowerCase()) { return -1; }
+       
+            if (a[property].toLowerCase() > b[property].toLowerCase()) { return 1; }
+          return 0; 
+           
+        }
+        })
+        this.setState({searchRes: employees})
+      }
 
     render() {
     return (
@@ -49,9 +71,9 @@ class Home extends React.Component {
        <SearchForm 
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
-            employees={this.state.response}
+            employees={this.state.searchRes}
        />
-       <Table employees={this.state.response}/>
+       <Table employees={this.state.searchRes} sorter={this.sorter}/>
         </div>
     )}
 }

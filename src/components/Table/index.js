@@ -6,11 +6,11 @@ function Table (props) {
         return (
             <tr>
                 <th><img src={person.picture.medium}/></th>
-                <th>{person.name.first + " " + person.name.last}</th>
+                <th onClick={() => props.sorter ('name', 'first')}>{person.name.first + " " + person.name.last}</th>
                 <th>{person.gender}</th>
                 <th>{person.dob.age}</th>
-                <th>{person.location.city + ", " + person.location.state}</th>
-                <th>{person.email}</th>
+                <th onClick={() => props.sorter ('location', 'city')}>{person.location.city + ", " + person.location.state}</th>
+                <th onClick={() => props.sorter ('email')}>{person.email}</th>
             </tr>
             
         )
